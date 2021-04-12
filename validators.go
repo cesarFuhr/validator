@@ -20,7 +20,7 @@ func NewStringValidator(name string, required bool, r ...StringRule) StringValid
 
 func (sv StringValidator) Validate(s string) error {
 	if err := sv.required.Validate(s); err != nil {
-		return err
+		return fmt.Errorf("%s is invalid: %w", sv.fieldName, err)
 	}
 	if isEmpty(s) {
 		return nil
